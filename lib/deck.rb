@@ -33,14 +33,14 @@ class Deck
   end
   
   def remove_card #remove top card of the deck
-    cards.pop do |card|
+    cards.shift do |card|
 
     end
   end
 
   def add_card(card) #will add a card to the bottom
     cards.push(card) do |card|
-      
+
     end
   end
 end
