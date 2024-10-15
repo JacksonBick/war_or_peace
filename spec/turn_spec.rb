@@ -3,6 +3,7 @@ require './lib/card'
 require './lib/deck'
 require './lib/player'
 require './lib/turn'
+require 'pry'
 
 RSpec.describe Turn do
   describe "initialize" do
@@ -89,13 +90,34 @@ RSpec.describe Turn do
       card7 = Card.new(:heart, '3', 3)
       card8 = Card.new(:diamond, '2', 2)
       deck1 = Deck.new([card1, card2, card5, card8])
-      deck2 = Deck.new([card1, card4, card6, card7])
+      deck2 = Deck.new([card3, card4, card6, card7])
       player1 = Player.new('Jackson', deck1)
       player2 = Player.new('Kate', deck2)
       turn = Turn.new(player1, player2)
 
-      expect(turn.pile_cards).to eq([card5, card6, card2, card4, card1, card1])
+      expect(turn.pile_cards).to eq([card1, card3])
     end
   end
-
+  describe "award_spoils" do
+    it "gives the winner the spoils of war" do
+      card1 = Card.new(:diamond, 'Queen', 12)
+      card2 = Card.new(:hearts, '9', 9)
+      card3 = Card.new(:diamond, '4', 4)
+      card4 = Card.new(:diamond, 'Jack', 11)
+      card5 = Card.new(:heart, '8', 8)
+      card6 = Card.new(:spade, '5', 5)
+      card7 = Card.new(:heart, '3', 3)
+      card8 = Card.new(:diamond, '2', 2)
+      deck1 = Deck.new([card1, card2, card5, card8])
+      deck2 = Deck.new([card3, card4, card6, card7])
+      player1 = Player.new('Jackson', deck1)
+      player2 = Player.new('Kate', deck2)
+      turn = Turn.new(player1, player2)
+      turn_winner = turn.winner
+      turn.pile_cards
+      turn.award_spoils(turn_winner)
+      puts player1.deck.cards.length
+      expect(player1.deck.cards).to eq([card2, card5, card8, card1, card3])
+    end
+  end
 end
