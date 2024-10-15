@@ -8,13 +8,7 @@ class Deck
   end
 
   def rank_of_card_at(index) #index location of card to be used
-    #require "pry" ; binding.pry
-    if @cards[index] == nil
-      p "No card in position. Please enter valid index"
-    else
-      card = @cards[index]
-      card.rank
-    end
+    @index = cards[index].rank
   end
 
   def high_ranking_cards #return array of cards ranked <=11
